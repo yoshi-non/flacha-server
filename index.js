@@ -14,7 +14,6 @@ const io = new Server(server, {
     },
 });
 
-const PORT = process.env.PORT ? process.env.PORT : 5000;
 
 //test
 app.get("/", (req, res) => {
@@ -33,4 +32,5 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(PORT, () => console.log(`server is running on ${PORT}`));
+// const port = process.env.PORT || 5000
+// server.listen(port, () => console.log(`server is running on ${PORT}`));
