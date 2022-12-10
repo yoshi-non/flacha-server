@@ -1,8 +1,8 @@
 const express = require("express")
 const app = express()
 
-const https = require("https")
-const server = https.createServer(app)
+const http = require("http")
+const server = http.createServer(app)
 
 const { Server } = require("socket.io");
 
@@ -14,11 +14,12 @@ const io = new Server(server, {
     },
 });
 
+const port = Number(!!process.env.PORT) || 5000;
 
-//test
-app.get("/", (req, res) => {
-    res.send("<h1>Hello world</h1>");
-});
+// //test
+// app.get("/", (req, res) => {
+//     res.send("<h1>Hello world</h1>");
+// });
 
 //クライアントと通信
 io.on("connection", (socket) => {
@@ -32,5 +33,4 @@ io.on("connection", (socket) => {
     });
 });
 
-// const port = process.env.PORT || 5000
-// server.listen(port, () => console.log(`server is running on ${PORT}`));
+server.listen(port, () => console.log(`server is running on ${port}`));
