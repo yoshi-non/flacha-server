@@ -14,12 +14,18 @@ const io = new Server(server, {
     },
 });
 
-const port = 10000;
+const port = Number(!!process.env.PORT) || 10000;
 
 // //test
 // app.get("/", (req, res) => {
 //     res.send("<h1>Hello world</h1>");
 // });
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 //クライアントと通信
 io.on("connection", (socket) => {
